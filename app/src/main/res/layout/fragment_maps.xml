@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp"
+    android:orientation="vertical"
+    tools:context=".MapsFragment">   <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    tools:context="com.example.m007.map.MapsActivity"
+    tools:layout="@layout/fragment_maps" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/destination"
+            android:layout_width="300sp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:text="الجهة المرادة"
+            android:layout_weight="50"
+            android:textSize="30sp"
+            />
+
+        <Button
+            android:id="@+id/srchbybusnum"
+            android:layout_width="300sp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:text="بحث برقم الاوتوبيس"
+            android:layout_weight="50"
+            android:textSize="30sp"
+            />
+    </LinearLayout>
+</LinearLayout>
