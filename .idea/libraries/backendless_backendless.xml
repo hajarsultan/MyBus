@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="backendless.backendless">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/backendless/backendless.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
