@@ -9,7 +9,8 @@ import com.backendless.exceptions.BackendlessFault;
 /**
  * Created by ENG MUHAMED on 19/04/2016.
  */
-public class LoadingCallback<T> implements AsyncCallback<T>{
+
+public class LoadingCallback<T> implements AsyncCallback<T> {
     private  Context context;
     private ProgressDialog progres;
 

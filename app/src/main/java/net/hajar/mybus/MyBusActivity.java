@@ -1,10 +1,14 @@
 package net.hajar.mybus;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
 
 public class MyBusActivity extends AppCompatActivity {
 
@@ -34,5 +38,32 @@ public class MyBusActivity extends AppCompatActivity {
 
             }
         });
+
+
+        ((Button)findViewById(R.id.testadd)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Buses bus = new Buses();
+                bus.setBusline("Test");
+                bus.setBusnumber(001);
+                bus.setEnd("END");
+                bus.setStart("START");
+
+
+                bus.saveAsync(new AsyncCallback<Buses>() {
+                    @Override
+                    public void handleResponse(Buses buses) {
+                        Log.d("ADD BUS TEST", "handleResponse: OK");
+                    }
+
+                    @Override
+                    public void handleFault(BackendlessFault backendlessFault) {
+                        Log.e("ADD BUS TEST", "handleFault: " + backendlessFault.toString());
+                    }
+                });
+            }
+        });
     }
+
+
 }
