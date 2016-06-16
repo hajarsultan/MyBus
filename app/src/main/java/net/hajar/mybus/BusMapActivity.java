@@ -10,6 +10,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -85,15 +87,32 @@ public class BusMapActivity extends FragmentActivity implements
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
+
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        location Loca=new location();
+        Loca.setcurrentLong(mLastLocation.getLongitude());
+        Loca.setcurrentLat(mLastLocation.getLatitude());
+        Loca.saveAsync(new AsyncCallback<location>() {
+            @Override
+            public void handleResponse(location location) {
+
+            }
+
+            @Override
+            public void handleFault(BackendlessFault backendlessFault) {
+
+            }
+        });
         if (mLastLocation != null) {
             Toast.makeText(BusMapActivity.this, "Lat:"+mLastLocation.getLatitude()+",long:"+mLastLocation.getLongitude(), Toast.LENGTH_SHORT).show();
             LatLng currentPos = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
             mMap.addMarker(new MarkerOptions().position(currentPos).title("You are here !"));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPos));
+           // Loca.setCurrentlocation(currentPos);
+
         }
     }
+
 
     @Override
     public void onConnectionSuspended(int i) {

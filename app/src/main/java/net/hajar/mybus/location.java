@@ -7,33 +7,33 @@ import com.backendless.persistence.BackendlessDataQuery;
 
 public class location
 {
-  private Double currentlocation;
-  private Double lastlocation;
+  private Double lastLat;
+  private Double lastLong;
   private java.util.Date updated;
   private Integer LSN;
   private java.util.Date created;
   private String objectId;
-  private Double latetude;
+  private Double currentLat;
   private String ownerId;
-  private Double longtude;
-  public Double getCurrentlocation()
+  private Double currentLong;
+  public Double getlastLong()
   {
-    return currentlocation;
+    return lastLong;
   }
 
-  public void setCurrentlocation( Double currentlocation )
+  public void setlastLong( Double lastLong )
   {
-    this.currentlocation = currentlocation;
+    this.lastLong = lastLong;
   }
 
-  public Double getLastlocation()
+  public Double getlastLat()
   {
-    return lastlocation;
+    return lastLat;
   }
 
-  public void setLastlocation( Double lastlocation )
+  public void setlastLat( Double lastlocation )
   {
-    this.lastlocation = lastlocation;
+    this.lastLat = lastLong;
   }
 
   public java.util.Date getUpdated()
@@ -61,14 +61,14 @@ public class location
     return objectId;
   }
 
-  public Double getLatetude()
+  public Double getcurrentLat()
   {
-    return latetude;
+    return currentLat;
   }
 
-  public void setLatetude( Double latetude )
+  public void setcurrentLat( Double currentLat )
   {
-    this.latetude = latetude;
+    this.currentLat = currentLat;
   }
 
   public String getOwnerId()
@@ -76,14 +76,14 @@ public class location
     return ownerId;
   }
 
-  public Double getLongtude()
+  public Double getcurrentLong()
   {
-    return longtude;
+    return currentLong;
   }
 
-  public void setLongtude( Double longtude )
+  public void setcurrentLong( Double currentLong )
   {
-    this.longtude = longtude;
+    this.currentLong = currentLong;
   }
 
                                                     
