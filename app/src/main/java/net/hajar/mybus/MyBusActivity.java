@@ -45,7 +45,7 @@ public class MyBusActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Buses bus = new Buses();
                 bus.setBusline("Test");
-                bus.setBusnumber(001);
+                bus.setBusnumber("");
                 bus.setEnd("END");
                 bus.setStart("START");
 

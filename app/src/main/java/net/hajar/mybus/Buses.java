@@ -9,7 +9,7 @@ public class Buses
 {
   private String busline;
   private String end;
-  private Integer busnumber;
+  private String busnumber;
   private java.util.Date updated;
   private String ownerId;
   private String start;
@@ -37,12 +37,12 @@ public class Buses
     this.end = end;
   }
 
-  public Integer getBusnumber()
+  public String getBusnumber()
   {
     return busnumber;
   }
 
-  public void setBusnumber( Integer busnumber )
+  public void setBusnumber( String busnumber )
   {
     this.busnumber = busnumber;
   }

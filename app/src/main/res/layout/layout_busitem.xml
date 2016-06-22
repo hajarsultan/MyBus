@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF">
+    <android.support.v7.widget.CardView
+        app:contentPadding="8dp"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#f5f5f5">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginBottom="1dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="نقل جماعي 10"
+            android:id="@+id/buslayout.number"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:textSize="20sp" />
+        <View
+            android:layout_marginTop="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginLeft="96dp"
+            android:layout_marginRight="96dp"
+            android:background="#414141"/>
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="نهاية"
+                android:id="@+id/textView2"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:textColor="#000"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#7c7c7c"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="بداية"
+                android:id="@+id/textView3"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:textColor="#000"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#7c7c7c"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="زهراء مدينة نصر"
+                android:id="@+id/buslayout.end"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:textColor="#000"
+                android:gravity="center"
+                android:textSize="16sp" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#7c7c7c"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="مساكن الأميرية"
+                android:id="@+id/buslayout.start"
+                android:layout_weight="1"
+                android:padding="4dp"
+                android:textColor="#000"
+                android:gravity="center"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#7c7c7c"/>
+        <TextView
+            android:id="@+id/buslayout.line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="منشية ناصر - الاتوستراد - نادي السكة - امتداد رمسيس - عباسية"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="#000"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="أظهر علي الخريطة"
+                android:id="@+id/button"
+                android:textColor="#fff"
+                android:layout_weight="1"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="إختر الأوتوبيس"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:id="@+id/button2"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</FrameLayout>
