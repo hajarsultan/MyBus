@@ -1,6 +1,7 @@
 package net.hajar.mybus;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -9,17 +10,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.backendless.Backendless;
-import com.backendless.BackendlessCollection;
-import com.backendless.async.callback.AsyncCallback;
-import com.backendless.exceptions.BackendlessFault;
-import com.backendless.persistence.BackendlessDataQuery;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
@@ -30,14 +27,12 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
-import com.google.android.gms.location.LocationSettingsStates;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class BusMapActivity extends FragmentActivity implements
@@ -59,24 +54,28 @@ public class BusMapActivity extends FragmentActivity implements
 
     private TextView currentLocationTV, savedLocationTV, savedDistanceTV;
     private Button saveBTN,showBusesBTN,selectBusesBTN;
+    private EditText busSearchET;
 
 
 
 
     private void initViews() {
-        currentLocationTV = (TextView) findViewById(R.id.currntLoca);
-        savedLocationTV = (TextView) findViewById(R.id.savedLoc);
-        savedDistanceTV = (TextView) findViewById(R.id.savedDistance);
-
-        saveBTN = (Button) findViewById(R.id.saveLoc);
         showBusesBTN = (Button) findViewById(R.id.showBuses);
         selectBusesBTN = (Button) findViewById(R.id.selectBuses);
 
-        saveBTN.setOnClickListener(new View.OnClickListener() {
+        busSearchET = (EditText) findViewById(R.id.bus_search);
+
+        busSearchET.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onClick(View v) {
-                savedLocation = mLastLocation;
-                savedLocationTV.setText("Saved Location : "+getReadbleLatLng(savedLocation));
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    String whereClause = "busline LIKE '%"+busSearchET.getText().toString()+"%'";
+                    startActivity(new Intent(BusMapActivity.this,BusListActivity.class)
+                            .putExtra(BusListActivity.KEY_QUERY_WHERE_CLAUSE,whereClause));
+                    handled = true;
+                }
+                return handled;
             }
         });
 
@@ -92,20 +91,8 @@ public class BusMapActivity extends FragmentActivity implements
                             //do your magic
 
                             String whereClause = "busnumber LIKE '%"+s+"%'";
-                            BackendlessDataQuery dataQuery = new BackendlessDataQuery();
-                            dataQuery.setWhereClause( whereClause );
-                            dataQuery.setPageSize(50);
-                            Backendless.Persistence.of(Buses.class).find(dataQuery, new AsyncCallback<BackendlessCollection<Buses>>() {
-                                @Override
-                                public void handleResponse(BackendlessCollection<Buses> busesBackendlessCollection) {
-                                    Log.d(TAG, "handleResponse: "+busesBackendlessCollection.toString());
-                                }
-
-                                @Override
-                                public void handleFault(BackendlessFault backendlessFault) {
-
-                                }
-                            });
+                            startActivity(new Intent(BusMapActivity.this,BusListActivity.class)
+                                    .putExtra(BusListActivity.KEY_QUERY_WHERE_CLAUSE,whereClause));
 
                         }
                     }
@@ -114,12 +101,7 @@ public class BusMapActivity extends FragmentActivity implements
         });
     }
 
-    void showLocation(){
-        currentLocationTV.setText("Current Location : "+getReadbleLatLng(mLastLocation) );
-        if(savedLocation != null){
-            savedDistanceTV.setText("Distance : "+ savedLocation.distanceTo(mLastLocation) + "meters");
-        }
-    }
+
 
     String getReadbleLatLng(Location loc){
         return "{ lat:" + loc.getLatitude() + " ,lng:"+loc.getLongitude()+" }";
@@ -148,19 +130,6 @@ public class BusMapActivity extends FragmentActivity implements
 
     }
 
-
-    float distFrom(Location loc1,Location loc2) {
-        double earthRadius = 6371000; //meters
-        double dLat = Math.toRadians(loc2.getLatitude()-loc1.getLatitude());
-        double dLng = Math.toRadians(loc2.getLongitude()-loc1.getLongitude());
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                Math.cos(Math.toRadians(loc1.getLatitude())) * Math.cos(Math.toRadians(loc2.getLatitude())) *
-                        Math.sin(dLng/2) * Math.sin(dLng/2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        float dist = (float) (earthRadius * c);
-
-        return dist;
-    }
 
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
@@ -210,6 +179,7 @@ public class BusMapActivity extends FragmentActivity implements
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setPadding(0,230,0,230);
     }
 
     @Override
@@ -225,17 +195,16 @@ public class BusMapActivity extends FragmentActivity implements
             return;
         }
 
-        startLocationUpdates();
+        //startLocationUpdates();
+        mMap.setMyLocationEnabled(true);
 
-//        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
-//        if (mLastLocation != null) {
-//            LatLng currentPos = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-//            usersCurrentLocation = new MarkerOptions().position(currentPos).title("You are here !");
-//            mMap.addMarker(usersCurrentLocation);
-//            mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPos));
-//            showLocation();
-//        }
+        if (mLastLocation != null) {
+            LatLng currentPos = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPos));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+        }
     }
 
 
@@ -272,11 +241,15 @@ public class BusMapActivity extends FragmentActivity implements
 
     @Override
     public void onLocationChanged(Location location) {
+        boolean isMarkerAdded = true;
         mLastLocation = location;
         LatLng currentPos = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-        usersCurrentLocation = new MarkerOptions().position(currentPos).title("You are here !");
-        mMap.addMarker(usersCurrentLocation);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPos));
-        showLocation();
+        if(usersCurrentLocation == null)isMarkerAdded = false;
+        //usersCurrentLocation = new MarkerOptions().position(currentPos).title("You are here !").icon(BitmapDescriptorFactory.fromResource(R.drawable.street_view));
+        if(!isMarkerAdded){
+            //mMap.addMarker(usersCurrentLocation);
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPos));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+        }
     }
 }
