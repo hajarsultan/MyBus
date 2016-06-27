@@ -41,6 +41,12 @@ public class BusMapActivity extends FragmentActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
+
+    private static final String KEY_TRACK_POSTION = "TRACK_POSTION";
+    private static final String KEY_BUS_NUMBER = "BUS_NUMBER";
+
+    private String unserID = "test";
+
     private static final String TAG = "BusMapActivity";
 
     private GoogleMap mMap;

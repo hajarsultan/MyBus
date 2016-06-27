@@ -168,7 +168,11 @@ public class BusListAdapter extends RecyclerView.Adapter {
                             +"\n الأتوبيس المتوجة من '"+bus.getStart()+"' إلي '"+bus.getEnd()+"' .\n")
                             .setPositiveButton("متأكد", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    // continue with delete
+
+                                    context.startActivity(new Intent(context,TrackingMapActivity.class)
+                                            .putExtra(TrackingMapActivity.KEY_BUS_NUMBER,bus.getBusnumber())
+                                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
                                 }
                             })
                             .setNegativeButton("إلغاء", new DialogInterface.OnClickListener() {

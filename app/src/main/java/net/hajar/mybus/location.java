@@ -7,48 +7,41 @@ import com.backendless.persistence.BackendlessDataQuery;
 
 public class location
 {
-  private Double lastLat;
-  private Double lastLong;
   private java.util.Date updated;
-  private Integer LSN;
   private java.util.Date created;
   private String objectId;
-  private Double currentLat;
+  private Double lat;
   private String ownerId;
-  private Double currentLong;
-  public Double getlastLong()
-  {
-    return lastLong;
-  }
+  private String bus_number;
+  private Double lng;
 
   public void setlastLong( Double lastLong )
   {
-    this.lastLong = lastLong;
-  }
-
-  public Double getlastLat()
-  {
-    return lastLat;
   }
 
   public void setlastLat( Double lastlocation )
   {
-    this.lastLat = lastLong;
+  }
+
+  public Double getLng() {
+    return lng;
+  }
+
+  public String getBus_number() {
+    return bus_number;
+  }
+
+  public void setBus_number(String bus_number) {
+    this.bus_number = bus_number;
+  }
+
+  public Double getLat() {
+    return lat;
   }
 
   public java.util.Date getUpdated()
   {
     return updated;
-  }
-
-  public Integer getLSN()
-  {
-    return LSN;
-  }
-
-  public void setLSN( Integer LSN )
-  {
-    this.LSN = LSN;
   }
 
   public java.util.Date getCreated()
@@ -63,12 +56,12 @@ public class location
 
   public Double getcurrentLat()
   {
-    return currentLat;
+    return lat;
   }
 
   public void setcurrentLat( Double currentLat )
   {
-    this.currentLat = currentLat;
+    this.lat = currentLat;
   }
 
   public String getOwnerId()
@@ -76,14 +69,26 @@ public class location
     return ownerId;
   }
 
+  public void setOwnerId(String ownerId) {
+    this.ownerId = ownerId;
+  }
+
+  public void setLng(Double lng) {
+    this.lng = lng;
+  }
+
+  public void setLat(Double lat) {
+    this.lat = lat;
+  }
+
   public Double getcurrentLong()
   {
-    return currentLong;
+    return lng;
   }
 
   public void setcurrentLong( Double currentLong )
   {
-    this.currentLong = currentLong;
+    this.lng = currentLong;
   }
 
                                                     

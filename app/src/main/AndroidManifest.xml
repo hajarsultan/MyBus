@@ -35,7 +35,10 @@
         <activity android:name=".BusListActivity" />
         <activity
             android:name=".BusShowMapActivity"
-            android:label="@string/title_activity_bus_show_map"></activity>
+            android:label="@string/title_activity_bus_show_map" />
+        <activity
+            android:name=".TrackingMapActivity"
+            android:label="@string/title_activity_tracking_map"></activity>
     </application>
 
 </manifest>

@@ -10,4 +10,8 @@
 
     </style>
 
+    <style name="errBtn" parent="Base.Widget.AppCompat.Button">
+        <item name="colorButtonNormal">#D32F2F</item>
+    </style>
+
 </resources>
