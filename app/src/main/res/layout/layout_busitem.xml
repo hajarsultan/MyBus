@@ -123,7 +123,14 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="إختر الأوتوبيس"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:id="@+id/buslayout.choose"
+                android:layout_weight="1" />
             <android.support.v7.widget.AppCompatButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -133,14 +140,7 @@
                 android:layout_weight="1"
                 android:textStyle="bold" />
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="إختر الأوتوبيس"
-                android:textColor="#fff"
-                android:textStyle="bold"
-                android:id="@+id/buslayout.choose"
-                android:layout_weight="1" />
+
         </LinearLayout>
     </LinearLayout>
 

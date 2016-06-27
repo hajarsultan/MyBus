@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyBusActivity"></activity>
+        <activity android:name=".MyBusActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".LoginActivity" />
 
@@ -32,7 +32,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".CompanyActivity" />
-        <activity android:name=".BusListActivity"></activity>
+        <activity android:name=".BusListActivity" />
+        <activity
+            android:name=".BusShowMapActivity"
+            android:label="@string/title_activity_bus_show_map"></activity>
     </application>
 
 </manifest>

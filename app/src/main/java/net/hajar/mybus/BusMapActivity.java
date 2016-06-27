@@ -51,16 +51,13 @@ public class BusMapActivity extends FragmentActivity implements
     private MarkerOptions usersCurrentLocation;
     private boolean mRequestingLocationUpdates = false;
 
-
     private TextView currentLocationTV, savedLocationTV, savedDistanceTV;
     private Button saveBTN,showBusesBTN,selectBusesBTN;
     private EditText busSearchET;
 
-
-
-
     private void initViews() {
         showBusesBTN = (Button) findViewById(R.id.showBuses);
+
         selectBusesBTN = (Button) findViewById(R.id.selectBuses);
 
         busSearchET = (EditText) findViewById(R.id.bus_search);
@@ -79,7 +76,7 @@ public class BusMapActivity extends FragmentActivity implements
             }
         });
 
-        showBusesBTN.setOnClickListener(new View.OnClickListener() {
+        selectBusesBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogHelper.createInputDialog(BusMapActivity.this, "أدخل رقم الأوتوبيس للبحث عنة", new DialogHelper.OnInputDialogOK() {
@@ -100,13 +97,7 @@ public class BusMapActivity extends FragmentActivity implements
             }
         });
     }
-
-
-
-    String getReadbleLatLng(Location loc){
-        return "{ lat:" + loc.getLatitude() + " ,lng:"+loc.getLongitude()+" }";
-    }
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -179,7 +170,7 @@ public class BusMapActivity extends FragmentActivity implements
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setPadding(0,230,0,230);
+        mMap.setPadding(0,170,0,230);
     }
 
     @Override

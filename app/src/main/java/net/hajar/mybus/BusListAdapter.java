@@ -1,7 +1,10 @@
 package net.hajar.mybus;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.widget.ContentLoadingProgressBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -138,14 +141,45 @@ public class BusListAdapter extends RecyclerView.Adapter {
             endTV = (TextView) v.findViewById(R.id.buslayout_end);
             lineTV = (TextView) v.findViewById(R.id.buslayout_line);
 
-            chooseBusBTN = (Button) v.findViewById(R.id.buslayout_show);
-            showOnMapBTN = (Button) v.findViewById(R.id.buslayout_choose);
+            chooseBusBTN = (Button) v.findViewById(R.id.buslayout_choose);
+            showOnMapBTN = (Button) v.findViewById(R.id.buslayout_show);
         }
-        public void bind(Buses bus){
+        public void bind(final Buses bus){
             busnumberTV.setText(bus.getBusnumber());
             startTV.setText(bus.getStart());
             endTV.setText(bus.getEnd());
             lineTV.setText(bus.getBusline());
+
+            showOnMapBTN.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    context.startActivity(new Intent(context,BusShowMapActivity.class)
+                    .putExtra(BusShowMapActivity.KEY_STATIONS,bus.getBusline())
+                    .putExtra(BusShowMapActivity.KEY_BUSNUMBER,bus.getBusnumber())
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                }
+            });
+
+            chooseBusBTN.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new AlertDialog.Builder(context)
+                            .setMessage("هل أنت متأكد من إختيارك لأتوبيس رقم '"+bus.getBusnumber()+"' لركوبة"
+                            +"\n الأتوبيس المتوجة من '"+bus.getStart()+"' إلي '"+bus.getEnd()+"' .\n")
+                            .setPositiveButton("متأكد", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // continue with delete
+                                }
+                            })
+                            .setNegativeButton("إلغاء", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // do nothing
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+            });
         }
     }
     class LoadMoreVH extends RecyclerView.ViewHolder{
