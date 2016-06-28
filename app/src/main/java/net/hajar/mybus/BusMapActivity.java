@@ -102,6 +102,14 @@ public class BusMapActivity extends FragmentActivity implements
                 });
             }
         });
+
+        showBusesBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BusMapActivity.this,BusListActivity.class)
+                        .putExtra(BusListActivity.KEY_SHOW_CURRENT_AVAILABLE_BUSES,true));
+            }
+        });
     }
     
     @Override
